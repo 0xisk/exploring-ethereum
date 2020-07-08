@@ -1,0 +1,17 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/austintgriffith/scaffold-eth.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "dex"]
+	remote = origin
+	merge = refs/heads/dex
+[remote "origin-eth"]
+	url = git@github.com:iskanderandrews/learning-ethereum.git
+	fetch = +refs/heads/*:refs/remotes/origin-eth/*
