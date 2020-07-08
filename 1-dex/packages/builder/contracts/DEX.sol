@@ -42,4 +42,17 @@ contract DEX {
 
     return tokens_bought;
   }
+
+  function tokenToEth(uint256 tokens) public returns (uint256) {
+    uint256 token_reserve = token.balanceOf(address(this));
+    uint256 eth_bought = price(tokens, token_reserve, address(this).balance);
+
+    msg.sender.transfer(eth_bought);
+
+    require(token.transferFrom(msg.sender, address(this), tokens));
+
+    return eth_bought;
+  }
+
+  
 }
