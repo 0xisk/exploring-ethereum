@@ -33,4 +33,13 @@ contract DEX {
 
     return numerator/denominator;
   }
+
+  function ethToToken() public payable returns (uint256) {
+    uint256 token_reserve = token.balanceOf(address(this));
+    uint256 tokens_bought = price(msg.value, address(this).balance.sub(msg.value), token_reserve);
+
+    require(token.transfer(msg.sender, tokens_bought));
+
+    return tokens_bought;
+  }
 }
