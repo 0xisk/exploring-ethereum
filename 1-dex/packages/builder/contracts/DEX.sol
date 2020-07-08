@@ -67,4 +67,18 @@ contract DEX {
 
     return liquidity_minted;
   }
+
+  function withdraw(uint256 amount) public returns (uint256, uint256) {
+    uint256 token_reserve = token.balanceOf(address(this));
+    uint256 eth_amount = amount.mul(address(this).balance) / totalLiquidity;
+    uint256 token_amount = amount.mul(token_reserve) / totalLiquidity;
+
+    liquidity[msg.sender] = liquidity[msg.sender].sub(eth_amount);
+    totalLiquidity = totalLiquidity.sub(eth_amount);
+    msg.sender.transfer(eth_amount);
+
+    require(token.transfer(msg.sender, token_amount));
+
+    return (eth_amount, token_amount);
+  }
 }
